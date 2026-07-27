@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="description" content="Sage Services — Premium digital solutions for businesses & creators. Virtual numbers, social media growth, and innovative tools." />
+  <title>Sage Services · Premium Digital Solutions</title>
+  <!-- Google Fonts: Inter & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      background: #0B0B0B;
+      color: #f0f0f0;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    /* ----- GLASS & ACCENTS ----- */
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 32px;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 28px;
+      padding: 28px 24px;
+      transition: all 0.25s ease;
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4);
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 200, 83, 0.25);
+      box-shadow: 0 24px 48px -12px rgba(0, 200, 83, 0.10);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .accent {
+      color: #00C853;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 12px 28px;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #fff;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(4px);
+    }
+    .btn-primary {
+      background: #00C853;
+      border-color: #00C853;
+      color: #0B0B0B;
+      font-weight: 600;
+      box-shadow: 0 8px 24px -8px rgba(0, 200, 83, 0.25);
+    }
+    .btn-primary:hover {
+      background: #00e660;
+      border-color: #00e660;
+      transform: scale(1.02);
+      box-shadow: 0 12px 32px -8px #00C85355;
+    }
+    .btn-outline {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: #00C853;
+    }
+    .btn-telegram {
+      background: #0088cc;
+      border-color: #0088cc;
+      color: white;
+    }
+    .btn-telegram:hover {
+      background: #00a2e0;
+      border-color: #00a2e0;
+    }
+    .btn-wa {
+      background: #25D366;
+      border-color: #25D366;
+      color: white;
+    }
+    .btn-wa:hover {
+      background: #2de07a;
+      border-color: #2de07a;
+    }
+    /* ----- LOADING ----- */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0B0B0B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 24px;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #loader.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-ring {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.04);
+      border-top-color: #00C853;
+      animation: spin 0.9s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    /* ----- FLOATING TELEGRAM & BACK TO TOP ----- */
+    .float-tg {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 100;
+      background: #0088cc;
+      width: 56px;
+      height: 56px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: white;
+      box-shadow: 0 12px 32px -8px #0088cc66;
+      transition: 0.2s;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .float-tg:hover {
+      transform: scale(1.08);
+      background: #00a2e0;
+    }
+    .back-top {
+      position: fixed;
+      bottom: 100px;
+      right: 28px;
+      z-index: 99;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(8px);
+      width: 44px;
+      height: 44px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #ccc;
+      transition: 0.2s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .back-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .back-top:hover {
+      background: #00C85322;
+      border-color: #00C85344;
+      color: #fff;
+    }
+    /* ----- HERO PARTICLES ----- */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.2;
+      animation: floatOrb 18s infinite alternate ease-in-out;
+    }
+    .orb:nth-child(1) {
+      width: 400px; height: 400px;
+      background: #00C853;
+      top: -10%; left: -10%;
+      animation-duration: 22s;
+    }
+    .orb:nth-child(2) {
+      width: 350px; height: 350px;
+      background: #0088cc;
+      bottom: -10%; right: -10%;
+      animation-duration: 26s;
+      opacity: 0.15;
+    }
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, -30px) scale(1.2); }
+    }
+    /* ----- SECTIONS ----- */
+    section {
+      padding: 80px 0;
+      position: relative;
+    }
+    .section-title {
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .section-sub {
+      color: #aaa;
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .badge-coming {
+      background: #00C85322;
+      color: #00C853;
+      padding: 6px 18px;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      border: 1px solid #00C85333;
+      display: inline-block;
+    }
+    /* FAQ accordion */
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      padding: 20px 0;
+    }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-question i {
+      transition: 0.25s;
+      color: #00C853;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+      color: #bbb;
+      padding-top: 0;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 180px;
+      opacity: 1;
+      padding-top: 16px;
+    }
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+    /* footer */
+    .footer {
+      border-top: 1px solid rgba(255,255,255,0.03);
+      padding: 48px 0 32px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    .footer a { color: #ccc; transition: 0.2s; }
+    .footer a:hover { color: #00C853; }
+    /* responsive */
+    @media (max-width: 768px) {
+      .section-title { font-size: 2rem; }
+      .hero-title { font-size: 2.6rem; }
+      .container { padding: 0 20px; }
+      .glass-card { padding: 20px; }
+    }
+    /* nav */
+    .navbar {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #bbb;
+    }
+    .nav-links a:hover { color: #fff; }
+    .logo {
+      font-size: 1.8rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: #00C853; }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .navbar .btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader" role="status" aria-label="Loading">
+  <div class="loader-ring"></div>
+  <span style="color: #666; font-size: 0.9rem; letter-spacing: 0.6px;">Sage Services</span>
+</div>
+
+<!-- FLOATING TELEGRAM (direct to personal @Sage_services) -->
+<a href="https://t.me/Sage_services?text=Hello%20Sage%20Services%2C%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener" class="float-tg" aria-label="Contact on Telegram">
+  <i class="fab fa-telegram-plane"></i>
+</a>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- NAVIGATION -->
+<header style="position: sticky; top: 0; z-index: 50; backdrop-filter: blur(16px); background: rgba(11,11,11,0.6); border-bottom: 1px solid rgba(255,255,255,0.02);">
+  <div class="container">
+    <nav class="navbar">
+      <div class="logo">Sage<span>.</span></div>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#upcoming">Upcoming</a>
+        <a href="#whysage">Why Sage</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="https://t.me/Sage_services" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.85rem;">
+        <i class="fab fa-telegram-plane"></i> Telegram
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" style="padding-top: 20px; min-height: 90vh; display: flex; align-items: center; position: relative; overflow: hidden;">
+  <div class="hero-bg">
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+  <div class="container" style="position: relative; z-index: 2;">
+    <div style="max-width: 800px;">
+      <h1 class="hero-title" style="font-size: 3.8rem; line-height: 1.1; margin-bottom: 24px; font-weight: 600;">
+        Premium Digital Solutions <br/><span class="accent">That Help You Stay Connected</span> and Grow.
+      </h1>
+      <p style="font-size: 1.2rem; color: #ccc; max-width: 600px; margin-bottom: 40px;">
+        We provide reliable virtual number solutions, social media growth support, and innovative digital tools designed for businesses, creators, and entrepreneurs.
+      </p>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+        <a href="#services" class="btn btn-primary"><i class="fas fa-rocket"></i> Explore Services</a>
+        <a href="https://t.me/Sage_services" target="_blank" rel="noopener" class="btn btn-telegram"><i class="fab fa-telegram-plane"></i> Contact on Telegram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <h2 class="section-title">Our <span class="accent">Services</span></h2>
+    <p class="section-sub">Premium solutions crafted for modern businesses and creators.</p>
+    <div class="grid-2">
+      <!-- card 1 -->
+      <div class="glass-card">
+        <div style="font-size: 2.2rem; margin-bottom: 12px; color: #00C853;"><i class="fas fa-phone-alt"></i></div>
+        <h3 style="font-size: 1.6rem; font-weight: 500;">Virtual Number Solutions</h3>
+        <p style="color: #bbb; margin: 12px 0 18px;">Reliable virtual number solutions for business communication, online services, and international use where permitted.</p>
+        <ul style="list-style: none; margin-bottom: 24px; color: #ccc; font-size: 0.95rem; display: flex; flex-direction: column; gap: 6px;">
+          <li><i class="fas fa-check-circle" style="color: #00C853; width: 20px;"></i> Multiple countries</li>
+          <li><i class="fas fa-check-circle" style="color: #00C853; width: 20px;"></i> Fast delivery</li>
+          <li><i class="fas fa-check-circle" style="color: #00C853; width: 20px;"></i> Reliable support</li>
+          <li><i class="fas fa-check-circle" style="color: #00C853; width: 20px;"></i> Long-term options</li>
+        </ul>
+        <a href="https://t.me/Sage_services?text=Hello%20Sage%20Services%2C%20I'm%20interested%20in%20your%20Virtual%20Number%20service." target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; justify-content: center;"><i class="fab fa-telegram-plane"></i> Contact on Telegram</a>
+      </div>
+      <!-- card 2 -->
+      <div class="glass-card">
+        <div style="font-size: 2.2rem; margin-bottom: 12px; color: #00C853;"><i class="fas fa-share-alt"></i></div>
+        <h3 style="font-size: 1.6rem; font-weight: 500;">Social Media Growth Support</h3>
+        <p style="color: #bbb; margin: 12px 0 18px;">Professional support for creators, brands, and businesses looking to improve their social media presence.</p>
+        <ul style="list-style: none; margin-bottom: 24px; color: #ccc; font-size: 0.95rem; display: flex; flex-direction: column; gap: 6px;">
+          <li><i class="fas fa-check-circle" style="color: #00C853; width: 20px;"></i> Multiple platforms</li>
+          <li><i class="fas fa-check-circle" style="color: #00C853; width: 20px;"></i> Fast support</li>
+          <li><i class="fas fa-check-circle" style="color: #00C853; width: 20px;"></i> Quality service</li>
+          <li><i class="fas fa-check-circle" style="color: #00C853; width: 20px;"></i> Business-friendly</li>
+        </ul>
+        <a href="https://t.me/Sage_services?text=Hello%20Sage%20Services%2C%20I'm%20interested%20in%20your%20Social%20Media%20Growth%20service." target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; justify-content: center;"><i class="fab fa-telegram-plane"></i> Contact on Telegram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPCOMING -->
+<section id="upcoming" style="background: rgba(0,200,83,0.02);">
+  <div class="container">
+    <div class="glass" style="padding: 48px 40px; position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; background: #00C85320; border-radius: 50%; filter: blur(60px);"></div>
+      <div style="position: relative; z-index: 2;">
+        <span class="badge-coming"><i class="fas fa-rocket" style="margin-right: 6px;"></i> Coming Soon</span>
+        <h2 style="font-size: 2.6rem; margin: 12px 0 4px;">SageSMC Trading Bot</h2>
+        <p style="color: #bbb; max-width: 600px; font-size: 1.1rem;">A professional Smart Money Concepts (SMC) trading assistant currently under development.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 8px; margin: 28px 0 32px;">
+          <span><i class="fas fa-check-circle" style="color: #00C853;"></i> SMC strategy</span>
+          <span><i class="fas fa-check-circle" style="color: #00C853;"></i> MT5 integration</span>
+          <span><i class="fas fa-check-circle" style="color: #00C853;"></i> Automation</span>
+          <span><i class="fas fa-check-circle" style="color: #00C853;"></i> Risk management</span>
+          <span><i class="fas fa-check-circle" style="color: #00C853;"></i> User-friendly UI</span>
+        </div>
+        <a href="https://t.me/Sage_services?text=Hello%20Sage%20Services%2C%20Please%20notify%20me%20when%20SageSMC%20launches." target="_blank" rel="noopener" class="btn btn-primary"><i class="fas fa-bell"></i> Notify Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE SAGE -->
+<section id="whysage">
+  <div class="container">
+    <h2 class="section-title">Why <span class="accent">Sage Services</span></h2>
+    <div class="grid-3">
+      <div class="glass-card"><i class="fas fa-bolt" style="color: #00C853; font-size: 2rem;"></i><h4 style="margin: 10px 0 4px;">Fast Support</h4><p style="color:#aaa; font-size:0.9rem;">Responsive, human support whenever you need.</p></div>
+      <div class="glass-card"><i class="fas fa-medal" style="color: #00C853; font-size: 2rem;"></i><h4 style="margin: 10px 0 4px;">Professional Service</h4><p style="color:#aaa; font-size:0.9rem;">Polished, reliable, and built for business.</p></div>
+      <div class="glass-card"><i class="fas fa-shield-alt" style="color: #00C853; font-size: 2rem;"></i><h4 style="margin: 10px 0 4px;">Trusted Solutions</h4><p style="color:#aaa; font-size:0.9rem;">Proven methods with a focus on integrity.</p></div>
+      <div class="glass-card"><i class="fas fa-smile" style="color: #00C853; font-size: 2rem;"></i><h4 style="margin: 10px 0 4px;">Customer Satisfaction</h4><p style="color:#aaa; font-size:0.9rem;">Your success is our priority.</p></div>
+      <div class="glass-card"><i class="fas fa-tag" style="color: #00C853; font-size: 2rem;"></i><h4 style="margin: 10px 0 4px;">Affordable Pricing</h4><p style="color:#aaa; font-size:0.9rem;">Premium quality, accessible rates.</p></div>
+      <div class="glass-card"><i class="fas fa-lock" style="color: #00C853; font-size: 2rem;"></i><h4 style="margin: 10px 0 4px;">Secure Communication</h4><p style="color:#aaa; font-size:0.9rem;">Your data and conversations stay private.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background: rgba(0,0,0,0.3);">
+  <div class="container">
+    <h2 class="section-title">Frequently <span class="accent">Asked</span></h2>
+    <div class="glass" style="padding: 8px 24px;">
+      <div class="faq-item active">
+        <div class="faq-question"><span>What is a virtual number?</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">A virtual number is a phone number not directly tied to a physical SIM. It forwards calls/messages to your existing device, ideal for privacy and international business.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span>How quickly are services delivered?</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Most virtual numbers are delivered within minutes. For social growth, timelines vary by package, but we prioritize fast, transparent service.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span>How do I contact support?</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Reach us directly on Telegram at @Sage_services. We reply within hours, often minutes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span>Which payment methods do you accept?</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">We accept crypto (USDT, BTC), bank transfers, and major cards via secure gateways. Contact us for details.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span>How do I get updates about SageSMC?</span> <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Click "Notify Me" on the SageSMC section or follow our Telegram channel for launch announcements and beta access.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT (updated with channels & prefilled messages) -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Get in <span class="accent">Touch</span></h2>
+    <div class="glass" style="padding: 40px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 1.2rem;"><i class="fab fa-telegram-plane" style="color: #00C853; font-size: 2rem;"></i> @Sage_services</div>
+        <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 8px; color: #ccc;">
+          <div><i class="fas fa-envelope" style="color: #00C853; width: 28px;"></i> kwesissales@gmail.com</div>
+          <div><i class="fas fa-phone-alt" style="color: #00C853; width: 28px;"></i> +234 802 445 6812</div>
+          <div><i class="fab fa-tiktok" style="color: #00C853; width: 28px;"></i> @sageservices_1</div>
+        </div>
+        <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <!-- Direct message links with prefilled text -->
+          <a href="https://t.me/Sage_services?text=Hello%20Sage%20Services%2C%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener" class="btn btn-telegram"><i class="fab fa-telegram-plane"></i> DM on Telegram</a>
+          <a href="https://wa.me/2348024456812?text=Hello%20Sage%20Services%2C%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener" class="btn btn-wa"><i class="fab fa-whatsapp"></i> DM on WhatsApp</a>
+        </div>
+        <!-- Channel links -->
+        <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="https://t.me/Sage_services1" target="_blank" rel="noopener" class="btn btn-outline"><i class="fab fa-telegram-plane"></i> Join Telegram Channel</a>
+          <a href="https://whatsapp.com/channel/0029VbCoM0r2f3ELB8txR23d" target="_blank" rel="noopener" class="btn btn-outline"><i class="fab fa-whatsapp"></i> Join WhatsApp Channel</a>
+          <a href="mailto:kwesissales@gmail.com" class="btn btn-outline"><i class="fas fa-envelope"></i> Email</a>
+          <a href="https://www.tiktok.com/@sageservices_1" target="_blank" rel="noopener" class="btn btn-outline"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
+      </div>
+      <div style="color: #888; font-size: 0.95rem;">Reach us 24/7 — we speak business.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER (updated with all links) -->
+<footer class="footer">
+  <div class="container">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px;">
+      <div>
+        <div class="logo" style="font-size: 1.8rem;">Sage<span>.</span></div>
+        <div style="color: #666; margin-top: 6px;">Premium Digital Solutions</div>
+      </div>
+      <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+        <a href="https://t.me/Sage_services" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+        <a href="https://t.me/Sage_services1" target="_blank"><i class="fab fa-telegram-plane"></i> TG Channel</a>
+        <a href="https://whatsapp.com/channel/0029VbCoM0r2f3ELB8txR23d" target="_blank"><i class="fab fa-whatsapp"></i> WA Channel</a>
+        <a href="https://www.tiktok.com/@sageservices_1" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a href="mailto:kwesissales@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(255,255,255,0.02); margin-top: 28px; padding-top: 20px; text-align: center; color: #555; font-size: 0.85rem;">
+      &copy; 2026 Sage Services. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // loader
+  window.addEventListener('load', () => {
+    document.getElementById('loader').classList.add('hide');
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-question');
+    q.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      if (!isActive) item.classList.add('active');
+    });
+  });
+
+  // back to top
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 600) backTop.classList.add('visible');
+    else backTop.classList.remove('visible');
+  });
+  backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // smooth anchor
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
